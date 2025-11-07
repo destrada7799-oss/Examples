@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sunrise Condo Story - Top Floor</title>
+    <style>
+        /* Base Setup - Light, Airy, and Inviting */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif; 
+            overflow: hidden;
+        }
+
+        /* Story Container - Background and Layout */
+        .story-container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            background: linear-gradient(rgba(25, 40, 70, 0.4), rgba(40, 60, 90, 0.45)),
+                        url('https://i.postimg.cc/sgk6jKds/DSC08402-HDR.jpg'); 
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 50px 30px 70px; /* Padding for the top, sides, and bottom CTA */
+        }
+
+        /* Header (Title) Styling */
+        .header {
+            text-align: center;
+            z-index: 2;
+            background: rgba(255, 255, 255, 0.2); 
+            padding: 20px;
+            border-radius: 15px;
+            backdrop-filter: blur(8px);
+            border-bottom: 3px solid #4CAF50;
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        .title {
+            font-size: 32px;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+            font-weight: 700;
+        }
+
+        /* --- NEW SECTION FOR CENTRAL CONTENT --- */
+        .central-content {
+            flex-grow: 1; /* Allows this container to fill the space between header and grid */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center; /* Center content vertically in the middle space */
+            gap: 20px;
+            z-index: 5;
+            padding: 20px 0;
+        }
+
+        /* Badge Styling (BALCONY LIFE | HIGH DEMAND) */
+        .new-badge {
+            background: linear-gradient(135deg, #FF9800, #F44336); /* Orange/Red for urgency */
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 20px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            box-shadow: 0 6px 20px rgba(255, 152, 0, 0.5);
+            animation: pulseFade 1.5s infinite alternate, bounceIn 0.8s;
+            text-transform: uppercase;
+        }
+
+        /* Featured Price Styling */
+        .featured-price {
+            font-size: 90px; /* Increased size since it has more room now */
+            color: #FFD700; 
+            font-weight: 900;
+            text-shadow: 4px 4px 10px rgba(0,0,0,0.9);
+            animation: priceReveal 1.2s ease-out forwards;
+            animation-delay: 0.5s;
+            opacity: 0;
+            transform: scale(0.5);
+        }
+
+        /* Showing Info Callout */
+        .showing-info {
+            font-size: 20px;
+            color: #E0FFFF;
+            font-weight: 700;
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.8);
+            animation: slideUp 0.8s ease-out forwards;
+            animation-delay: 1s;
+            opacity: 0;
+            background: rgba(0,0,0,0.3);
+            padding: 8px 15px;
+            border-radius: 8px;
+        }
+        
+        /* Key Feature Grid (Bottom) */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            z-index: 2;
+        }
+
+        .info-item {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 18px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            border-bottom: 4px solid #4CAF50; 
+            animation: fadeInUp 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        /* Animation Delays for Info Items */
+        .info-item:nth-child(1) { animation-delay: 1.5s; }
+        .info-item:nth-child(2) { animation-delay: 1.7s; }
+        .info-item:nth-child(3) { animation-delay: 1.9s; }
+
+        .info-icon {
+            font-size: 30px;
+            margin-bottom: 8px;
+            color: #4CAF50;
+        }
+
+        .info-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .info-label {
+            font-size: 13px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* CTA Button */
+        .cta-button {
+            background: linear-gradient(135deg, #00BCD4, #00ACC1); /* Teal/Blue CTA */
+            color: white;
+            padding: 18px 40px;
+            border-radius: 50px;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 6px 25px rgba(0, 188, 212, 0.5);
+            z-index: 2;
+            animation: fadeInUp 0.6s ease-out forwards;
+            animation-delay: 2.1s;
+            opacity: 0;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            text-decoration: none;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+        }
+
+        /* --- Animations (Reused/Modified) --- */
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes pulseFade {
+            0% { box-shadow: 0 0 0px rgba(255, 152, 0, 0.6); }
+            100% { box-shadow: 0 0 20px rgba(255, 152, 0, 0.9); }
+        }
+
+        @keyframes priceReveal {
+            0% { opacity: 0; transform: scale(0.5) rotate(-3deg); }
+            100% { opacity: 1; transform: scale(1) rotate(0deg); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="story-container">
+        <div class="header">
+            <h1 class="title">Sunrise Views: Your Affordable Top-Floor Sanctuary</h1>
+        </div>
+        
+        <div class="central-content">
+            <div class="new-badge">BALCONY LIFE | HIGH DEMAND</div>
+            <div class="featured-price">$175,000</div>
+            <div class="showing-info">Open House: Saturday, 11am-1pm!</div>
+        </div>
+        <div class="info-grid">
+            <div class="info-item">
+                <div class="info-icon">🛏️</div>
+                <div class="info-value">2 / 2</div>
+                <div class="info-label">Bedrooms / Baths</div>
+            </div>
+            <div class="info-item">
+                <div class="info-icon">🔝</div>
+                <div class="info-value">Top Floor</div>
+                <div class="info-label">Private Balcony View</div>
+            </div>
+            <div class="info-item">
+                <div class="info-icon">📐</div>
+                <div class="info-value">1,100</div>
+                <div class="info-label">Total SQ FT</div>
+            </div>
+        </div>
+
+        <a href="#link-to-schedule-showing" target="_blank" class="cta-button">
+            BOOK SATURDAY SHOWING
+        </a>
+    </div>
+</body>
+</html>
