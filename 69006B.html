@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Miami Beach Sunset View Condo</title>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    
+    <style>
+        /* Base Setup - Sunset Theme */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif; 
+            overflow: hidden;
+        }
+
+        /* Story Container - Background and Layout */
+        .story-container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            /* Using the sunset balcony view photo */
+            background: linear-gradient(rgba(100, 50, 20, 0.4), rgba(40, 20, 60, 0.7)),
+                        url('https://i.postimg.cc/65Ldp5c7/1.jpg'); 
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 50px 30px 70px;
+        }
+
+        /* Header (Title) Styling */
+        .header {
+            text-align: center;
+            z-index: 2;
+            background: rgba(0, 0, 0, 0.5); 
+            padding: 20px;
+            border-radius: 15px;
+            backdrop-filter: blur(8px);
+            border-bottom: 3px solid #FF5722; /* Sunset Orange accent */
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        .title {
+            font-size: 32px;
+            color: #FFECB3; /* Light, warm color */
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 2px 2px 5px rgba(0,0,0,1);
+            font-weight: 800;
+        }
+
+        /* Central Content Container (Price and Badge) */
+        .central-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            z-index: 5;
+            padding: 20px 0;
+        }
+
+        /* Badge Styling (INVESTOR FOCUS) */
+        .new-badge {
+            background: linear-gradient(135deg, #FF9800, #F44336); /* Orange/Red urgency */
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 20px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            box-shadow: 0 6px 20px rgba(255, 152, 0, 0.6);
+            animation: pulseFade 1.5s infinite alternate, bounceIn 0.8s;
+            text-transform: uppercase;
+        }
+
+        /* Featured Price Styling */
+        .featured-price {
+            font-size: 90px;
+            color: #FFEB3B; /* Yellow/Gold Price */
+            font-weight: 900;
+            text-shadow: 4px 4px 10px rgba(0,0,0,0.9);
+            animation: priceReveal 1.2s ease-out forwards;
+            animation-delay: 0.5s;
+            opacity: 0; 
+            transform: scale(0.5);
+        }
+
+        /* Location Callout */
+        .location-callout {
+            font-size: 18px;
+            color: #E0F7FA;
+            font-weight: 600;
+            text-shadow: 1px 1px 5px rgba(0,0,0,1);
+            animation: slideUp 0.8s ease-out forwards;
+            animation-delay: 1s;
+            opacity: 0; 
+            background: rgba(0,0,0,0.5);
+            padding: 8px 15px;
+            border-radius: 8px;
+        }
+        
+        /* Key Feature Grid (Bottom) */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            z-index: 2;
+        }
+
+        .info-item {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            border-bottom: 4px solid #FF5722; /* Sunset orange accent */
+            animation: fadeInUp 0.6s ease-out forwards;
+            opacity: 0; 
+        }
+
+        .info-item:nth-child(1) { animation-delay: 1.5s; }
+        .info-item:nth-child(2) { animation-delay: 1.7s; }
+        .info-item:nth-child(3) { animation-delay: 1.9s; }
+        .info-item:nth-child(4) { animation-delay: 2.1s; }
+
+        .info-icon {
+            font-size: 30px;
+            margin-bottom: 8px;
+            color: #FF9800;
+        }
+
+        .info-value {
+            font-size: 22px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .info-label {
+            font-size: 11px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* CTA Button Group */
+        .cta-group {
+            display: flex;
+            gap: 10px;
+            z-index: 2;
+            animation: fadeInUp 0.6s ease-out forwards;
+            animation-delay: 2.3s;
+            opacity: 0; 
+            width: 100%;
+            justify-content: space-between;
+        }
+
+        /* Primary CTA Button (Request Showing) */
+        .cta-button {
+            background: linear-gradient(135deg, #00796B, #4DB6AC); /* Teal/Mint action color */
+            color: white;
+            padding: 18px 25px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 6px 25px rgba(0, 121, 107, 0.7);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            text-decoration: none;
+            flex: 1;
+        }
+
+        /* Secondary CTA Button (Download) */
+        .download-button {
+            background: linear-gradient(135deg, #777, #555);
+            color: white;
+            padding: 18px 20px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 6px 25px rgba(0,0,0,0.5);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            text-decoration: none;
+            border: none;
+            white-space: nowrap;
+        }
+        .download-button:hover, .cta-button:hover { transform: scale(1.05); }
+
+        /* --- Keyframe Animations --- */
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes bounceIn { 0% { transform: scale(0); opacity: 0; } 50% { transform: scale(1.1); } 100% { transform: scale(1); opacity: 1; } }
+        @keyframes pulseFade { 0% { box-shadow: 0 0 0px rgba(255, 152, 0, 0.6); } 100% { box-shadow: 0 0 20px rgba(255, 152, 0, 0.9); } }
+        @keyframes priceReveal { 0% { opacity: 0; transform: scale(0.5) rotate(-3deg); } 100% { opacity: 1; transform: scale(1) rotate(0deg); } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* === SNAPSHOT MODE (The Fix for Download) === */
+        body.capturing * {
+            animation: none !important;
+            transition: none !important;
+            opacity: 1 !important;
+            transform: none !important;
+        }
+        body.capturing .story-container {
+            height: 100vh; 
+            width: 100vw;
+        }
+    </style>
+</head>
+<body>
+    <div class="story-container" id="capture-target">
+        <div class="header">
+            <h1 class="title">Intracoastal Sunsets: Your Miami Beach Balcony Awaits</h1>
+        </div>
+        
+        <div class="central-content">
+            <div class="new-badge">VIEWS | 1.5 BATHS | ASSIGNED PARKING</div>
+            <div class="featured-price">$290,000</div>
+            <div class="location-callout">Normandy Isles - Steps from the Ocean</div>
+        </div>
+
+        <div class="info-grid">
+            <div class="info-item">
+                <div class="info-icon">🛏️</div>
+                <div class="info-value">1 / 1.5</div>
+                <div class="info-label">Beds / Baths</div>
+            </div>
+            <div class="info-item">
+                <div class="info-icon">🌅</div>
+                <div class="info-value">Bay View</div>
+                <div class="info-label">Southern Exposure Balcony</div>
+            </div>
+            <div class="info-item">
+                <div class="info-icon">🚗</div>
+                <div class="info-value">1 Space</div>
+                <div class="info-label">Assigned Garage Parking</div>
+            </div>
+            <div class="info-item">
+                <div class="info-icon">📐</div>
+                <div class="info-value">800</div>
+                <div class="info-label">Total SQ FT</div>
+            </div>
+        </div>
+
+        <div class="cta-group">
+            <a href="https://www.compass.com/app/listing/6900-Bay-Dr-Unit-6B-Miami-Beach-FL-33141/1971724620038761713" target="_blank" class="cta-button">
+                REQUEST SHOWING
+            </a>
+            <button class="download-button" onclick="downloadImage()">
+                🖼️ DOWNLOAD
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function downloadImage() {
+            // Apply the capturing class to force visibility
+            document.body.classList.add('capturing');
+            
+            // Hide the download button itself
+            const downloadBtn = document.querySelector('.download-button');
+            const originalDisplay = downloadBtn.style.display;
+            downloadBtn.style.display = 'none';
+
+            // Capture the element
+            html2canvas(document.getElementById('capture-target'), {
+                allowTaint: true,
+                useCORS: true,
+                scale: 2,
+                scrollY: -window.scrollY 
+            }).then(canvas => {
+                // Download
+                const link = document.createElement('a');
+                link.download = 'MiamiBeach_Sunset_View.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+
+                // Cleanup (Reset visibility and remove class)
+                document.body.classList.remove('capturing');
+                downloadBtn.style.display = originalDisplay;
+            }).catch(err => {
+                console.error("Error capturing image:", err);
+                document.body.classList.remove('capturing');
+                downloadBtn.style.display = originalDisplay;
+                alert("Error capturing image. Please ensure all remote images have loaded fully.");
+            });
+        }
+    </script>
+</body>
+</html>
